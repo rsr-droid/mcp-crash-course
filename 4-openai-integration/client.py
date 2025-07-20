@@ -91,13 +91,13 @@ class MCPOpenAIClient:
         Returns:
             The response from OpenAI.
         """
-        # Get available tools
+        # Get available tools from mcp server i.e
         tools = await self.get_mcp_tools()
 
         # Initial OpenAI API call
         response = await self.openai_client.chat.completions.create(
             model=self.model,
-            messages=[{"role": "user", "content": query}],
+            messages=[{"role": "user", "content": query}], # query: "What is our company's vacation policy?"
             tools=tools,
             tool_choice="auto",
         )
@@ -150,14 +150,14 @@ class MCPOpenAIClient:
 
 async def main():
     """Main entry point for the client."""
-    client = MCPOpenAIClient()
-    await client.connect_to_server("server.py")
+    client = MCPOpenAIClient() # initialise the client
+    await client.connect_to_server("server.py") # connect to the server
 
     # Example: Ask about company vacation policy
-    query = "What is our company's vacation policy?"
+    query = "What is our company's vacation policy?" # query to ask the server
     print(f"\nQuery: {query}")
 
-    response = await client.process_query(query)
+    response = await client.process_query(query) # process the query
     print(f"\nResponse: {response}")
 
 

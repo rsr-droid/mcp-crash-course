@@ -100,7 +100,7 @@ async def process_query(query: str) -> str:
     # Get assistant's response
     assistant_message = response.choices[0].message
 
-    # Initialize conversation with user query and assistant response
+    # Initialize conversation with user query and the assistant response which has the tool calls
     messages = [
         {"role": "user", "content": query},
         assistant_message,
